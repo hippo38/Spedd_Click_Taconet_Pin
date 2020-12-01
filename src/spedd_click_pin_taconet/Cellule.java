@@ -10,5 +10,8 @@ package spedd_click_pin_taconet;
  * @author hpin
  */
 public class Cellule {
+    Bouton BoutonCourant;
+public boolean presenceBoutonVert(){
     
+}
 }
