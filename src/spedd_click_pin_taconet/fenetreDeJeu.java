@@ -16,6 +16,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
      */
     public fenetreDeJeu() {
         initComponents();
+        Panel_intro.setVisible(false);
+        Panel_jeu.setVisible(false);
     }
 
     /**
@@ -30,6 +32,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         Panel_intro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_start = new javax.swing.JButton();
+        Panel_jeu = new javax.swing.JPanel();
+        Panel_grille = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbl_score = new javax.swing.JLabel();
+        Panel_fin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -47,9 +55,47 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_start.setText("Start");
         Panel_intro.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 170, 90));
 
-        getContentPane().add(Panel_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 670));
+        getContentPane().add(Panel_intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 920, 580));
 
-        setBounds(0, 0, 1046, 704);
+        Panel_jeu.setBackground(new java.awt.Color(204, 153, 255));
+        Panel_jeu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Panel_grille.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_grille.setLayout(new java.awt.GridLayout(7, 7));
+        Panel_jeu.add(Panel_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 672, 672));
+
+        jLabel2.setFont(new java.awt.Font("Terminator Two", 3, 24)); // NOI18N
+        jLabel2.setText("SPEED CLICK");
+        Panel_jeu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 200, 50));
+
+        jLabel3.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Score:");
+        Panel_jeu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 90, 70));
+
+        lbl_score.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        lbl_score.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_score.setText("arbitraire");
+        Panel_jeu.add(lbl_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 270, -1, -1));
+
+        getContentPane().add(Panel_jeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 940, 620));
+
+        Panel_fin.setBackground(new java.awt.Color(255, 153, 153));
+
+        javax.swing.GroupLayout Panel_finLayout = new javax.swing.GroupLayout(Panel_fin);
+        Panel_fin.setLayout(Panel_finLayout);
+        Panel_finLayout.setHorizontalGroup(
+            Panel_finLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1030, Short.MAX_VALUE)
+        );
+        Panel_finLayout.setVerticalGroup(
+            Panel_finLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(Panel_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 690));
+
+        setBounds(0, 0, 1046, 729);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -88,8 +134,14 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panel_fin;
+    private javax.swing.JPanel Panel_grille;
     private javax.swing.JPanel Panel_intro;
+    private javax.swing.JPanel Panel_jeu;
     private javax.swing.JButton btn_start;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lbl_score;
     // End of variables declaration//GEN-END:variables
 }
