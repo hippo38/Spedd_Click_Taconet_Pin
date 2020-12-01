@@ -23,11 +23,11 @@ public class Grille {
 public boolean resteBoutonsVerts(){
     for(int i=0;i<7;i++){
             for(int j=0;j<7;j++){
-                if(Cellules[i][j].lireEtat()=="vert"){
-                    
+                //if(Cellules[i][j].BoutonCourant=="vert"){
+                 i=i+1;
                 }
             }
-            
+            return true;
         }
 }
-}
+

@@ -10,7 +10,7 @@ package spedd_click_pin_taconet;
  * @author hpin
  */
 public class Bouton {
-    String Etat;
+        String Etat;
 public Bouton(String unEtat){
     Etat=unEtat;
 }
@@ -18,3 +18,4 @@ public String lireEtat(){
     return Etat;
 }
 }
+
