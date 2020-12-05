@@ -15,11 +15,12 @@ public class Partie {
     Random random=new Random();
     Grille Grilledejeu=new Grille();
     int compteur;
-public void initialiserPartie(){
-    Grille Cellules=new Grille();
-    Cellules.viderGrille();
-    compteur=0;
-    Grilledejeu.placerBoutonVert(4, 4);
+    
+    public void initialiserPartie(){
+        Grille Cellules=new Grille();
+        Cellules.viderGrille();
+        compteur=0;
+        Grilledejeu.placerBoutonVert(4, 4);
             
-}
+    }
 }

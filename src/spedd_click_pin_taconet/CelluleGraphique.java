@@ -5,17 +5,17 @@
  */
 package spedd_click_pin_taconet;
 
+import javax.swing.JButton;
+
 /**
  *
- * @author hpin
+ * @author Donatien
  */
-public class Bouton {
-        String Etat;
-    public Bouton(String unEtat){
-        Etat=unEtat;
+public class CelluleGraphique extends JButton {
+    Cellule celluleAssociee;
+    
+    public CelluleGraphique(Cellule uneCellule){
+        celluleAssociee=uneCellule;
     }
-    public String lireEtat(){
-        return Etat;
-    }
+    
 }
-

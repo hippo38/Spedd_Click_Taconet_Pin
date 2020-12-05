@@ -11,36 +11,36 @@ package spedd_click_pin_taconet;
  */
 public class Cellule {
     Bouton BoutonCourant;
-public boolean presenceBoutonVert(){
-    if(BoutonCourant.lireEtat()=="Vert"){
-        return true;
+    public boolean presenceBoutonVert(){
+        if(BoutonCourant.lireEtat()=="Vert"){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    else{
-        return false;
+    public boolean presenceBoutonNoir(){
+        if(BoutonCourant.lireEtat()=="Noir"){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-}
-public boolean presenceBoutonNoir(){
-    if(BoutonCourant.lireEtat()=="Noir"){
-        return true;
+    public boolean presenceBoutonRouge(){
+        if(BoutonCourant.lireEtat()=="Rouge"){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    else{
-        return false;
+    public boolean presenceBoutonEteint(){
+        if(BoutonCourant.lireEtat()=="Eteint"){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-}
-public boolean presenceBoutonRouge(){
-    if(BoutonCourant.lireEtat()=="Rouge"){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-public boolean presenceBoutonEteint(){
-    if(BoutonCourant.lireEtat()=="Eteint"){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
 }

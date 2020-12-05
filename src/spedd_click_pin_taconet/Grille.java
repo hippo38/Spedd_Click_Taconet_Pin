@@ -20,9 +20,9 @@ public class Grille {
             
         }
 }
-public boolean resteBoutonsVerts(){
-    int a=0;
-    for(int i=0;i<7;i++){
+    public boolean resteBoutonsVerts(){
+        int a=0;
+        for(int i=0;i<7;i++){
             for(int j=0;j<7;j++){
                 if(Cellules[i][j].presenceBoutonVert()==false){
                 a=a+1;
@@ -32,55 +32,55 @@ public boolean resteBoutonsVerts(){
             }
             
         }
-    if(a==42){
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-public void viderGrille(){
-    for(int i=0;i<7;i++){
-        for(int j=0;j<7;j++){
-           Cellules[i][j].BoutonCourant.Etat="Eteint"; 
+        if(a==42){
+            return false;
         }
-}
-}
-public boolean placerBoutonVert(int i, int j){
-    if(Cellules[i][j].presenceBoutonVert()==false){
-        Cellules[i][j].BoutonCourant.Etat="Vert";
-        return true;
+        else{
+            return true;
+        }
     }
-    else{
-        return false;
+    public void viderGrille(){
+        for(int i=0;i<7;i++){
+            for(int j=0;j<7;j++){
+            Cellules[i][j].BoutonCourant.Etat="Eteint"; 
+            }
+        }
     }
-} 
-public boolean placerBoutonNoir(int i, int j){
-    if(Cellules[i][j].presenceBoutonNoir()==false){
-        Cellules[i][j].BoutonCourant.Etat="Noir";
-        return true;
-    }
-    else{
-        return false;
-    }
-} 
-public boolean placerBoutonRouge(int i, int j){
-    if(Cellules[i][j].presenceBoutonRouge()==false){
-        Cellules[i][j].BoutonCourant.Etat="Rouge";
-        return true;
-    }
-    else{
-        return false;
-    }
-} 
-public boolean placerBoutonEteint(int i, int j){
-    if(Cellules[i][j].presenceBoutonEteint()==false){
-        Cellules[i][j].BoutonCourant.Etat="Eteint";
-        return true;
-    }
-    else{
-        return false;
-    }
-} 
+    public boolean placerBoutonVert(int i, int j){
+        if(Cellules[i][j].presenceBoutonVert()==false){
+            Cellules[i][j].BoutonCourant.Etat="Vert";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonNoir(int i, int j){
+        if(Cellules[i][j].presenceBoutonNoir()==false){
+            Cellules[i][j].BoutonCourant.Etat="Noir";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonRouge(int i, int j){
+        if(Cellules[i][j].presenceBoutonRouge()==false){
+            Cellules[i][j].BoutonCourant.Etat="Rouge";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonEteint(int i, int j){
+        if(Cellules[i][j].presenceBoutonEteint()==false){
+            Cellules[i][j].BoutonCourant.Etat="Eteint";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
 }
 
