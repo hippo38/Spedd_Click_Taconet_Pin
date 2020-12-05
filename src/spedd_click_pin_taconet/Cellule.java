@@ -11,6 +11,10 @@ package spedd_click_pin_taconet;
  */
 public class Cellule {
     Bouton BoutonCourant;
+    
+    public Cellule(Bouton unBouton){
+        BoutonCourant=unBouton;
+    }
     public boolean presenceBoutonVert(){
         if(BoutonCourant.lireEtat()=="Vert"){
             return true;

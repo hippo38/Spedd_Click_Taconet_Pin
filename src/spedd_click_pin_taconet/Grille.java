@@ -11,11 +11,11 @@ package spedd_click_pin_taconet;
  */
 public class Grille {
     Cellule Cellules[][]=new Cellule[7][7];
-     
+    Bouton BoutonInit=new Bouton("Eteint");
      Grille(){
         for(int i=0;i<7;i++){
             for(int j=0;j<7;j++){
-                Cellules[i][j]=new Cellule();
+                Cellules[i][j]=new Cellule(BoutonInit);
             }
             
         }
@@ -81,6 +81,7 @@ public class Grille {
         else{
             return false;
         }
-    } 
+     
+    }
 }
 

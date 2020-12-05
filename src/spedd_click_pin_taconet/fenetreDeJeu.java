@@ -25,9 +25,19 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         Panel_intro.setVisible(true);
         Panel_jeu.setVisible(false);
         Panel_fin.setVisible(false);
+        //Grille Grilledejeu=new Grille();
         for (int i=0; i<7; i++){
             for (int j=0; j<7; j++){
                 CelluleGraphique cellGraph =new CelluleGraphique(Grilledejeu.Cellules[i][j]);
+                cellGraph.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Cellule c=cellGraph.celluleAssociee;
+                    if (c.presenceBoutonVert()){
+                        c.BoutonCourant.Etat="Rouge";
+                        Panel_grille.repaint();
+                    }
+                    }
+                });
                 Panel_grille.add(cellGraph);
             }
         }
@@ -145,6 +155,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Panel_intro.setVisible(false);
         Panel_jeu.setVisible(true);
+        initialiserPartie();
+        lbl_score.setText(compteur+"");
+        
+        
     }//GEN-LAST:event_btn_startActionPerformed
 
     /**
@@ -181,7 +195,20 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
         });
     }
-
+    public void initialiserPartie(){
+        //Grille Cellules=new Grille();
+        //Cellules.viderGrille();
+        compteur=0;
+        for (int i=0; i<7; i++){
+            for (int j=0; j<7; j++){
+                Grilledejeu.placerBoutonEteint(i, j);
+            }
+        }
+        //if(Grilledejeu.Cellules[4][4].presenceBoutonVert()==false){
+         Grilledejeu.placerBoutonVert(3,3);
+        
+            
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_fin;
     private javax.swing.JPanel Panel_grille;
