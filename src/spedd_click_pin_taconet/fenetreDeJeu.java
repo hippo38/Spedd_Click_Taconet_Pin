@@ -17,8 +17,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
      * Creates new form fenetreDeJeu
      */
     Random random=new Random();
-    Grille Grilledejeu=new Grille();
+    
     int compteur;
+    Cellule Cellules[][]=new Cellule[7][7];
+    Grille Grilledejeu=new Grille();
     
     public fenetreDeJeu() {
         initComponents();
@@ -33,9 +35,26 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                     Cellule c=cellGraph.celluleAssociee;
                     if (c.presenceBoutonVert()){
-                        c.BoutonCourant.Etat="Rouge";
-                        Panel_grille.repaint();
+                        c.BoutonCourant.Etat="Eteint";
+                        compteur=compteur+1;
+                        
+                        if (resteBoutonsVerts()==false){
+                            nouvelleGrille();
+                            
+                        }
+                        
+                        Panel_jeu.repaint();
+                    }else if (c.presenceBoutonRouge()){
+                        c.BoutonCourant.Etat="Eteint";
+                        compteur=compteur-5;
+                    }else if (c.presenceBoutonNoir()){
+                        compteur=0;
+                        lbl_scorefinal.setText(compteur+"");
+                        lbl_causefin.setText("GAME OVER! YOU HIT A BLACK BUTTON");
+                        Panel_jeu.setVisible(false);
+                        Panel_fin.setVisible(true);
                     }
+                    lbl_score.setText(compteur+"");
                     }
                 });
                 Panel_grille.add(cellGraph);
@@ -90,7 +109,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_score.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
         lbl_score.setForeground(new java.awt.Color(255, 255, 255));
         lbl_score.setText("arbitraire");
-        Panel_jeu.add(lbl_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 270, -1, -1));
+        Panel_jeu.add(lbl_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 265, -1, -1));
 
         getContentPane().add(Panel_jeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 690));
 
@@ -125,12 +144,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_causefin.setFont(new java.awt.Font("Terminator Two", 0, 18)); // NOI18N
         lbl_causefin.setForeground(new java.awt.Color(102, 102, 102));
         lbl_causefin.setText("cause fin");
-        Panel_fin.add(lbl_causefin, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 200, 50));
+        Panel_fin.add(lbl_causefin, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 230, 500, 50));
 
         jLabel5.setFont(new java.awt.Font("Terminator Two", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("SCORE FINAL:");
-        Panel_fin.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, -1, -1));
+        Panel_fin.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 360, -1, -1));
 
         lbl_scorefinal.setFont(new java.awt.Font("Terminator Two", 0, 18)); // NOI18N
         lbl_scorefinal.setText("score final");
@@ -139,11 +158,21 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_restart.setBackground(new java.awt.Color(255, 255, 255));
         btn_restart.setFont(new java.awt.Font("Terminator Two", 2, 12)); // NOI18N
         btn_restart.setText("restart");
+        btn_restart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restartActionPerformed(evt);
+            }
+        });
         Panel_fin.add(btn_restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 120, 50));
 
         btn_quit.setBackground(new java.awt.Color(255, 255, 255));
         btn_quit.setFont(new java.awt.Font("Terminator Two", 2, 12)); // NOI18N
         btn_quit.setText("Quit");
+        btn_quit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_quitActionPerformed(evt);
+            }
+        });
         Panel_fin.add(btn_quit, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 150, 50));
 
         getContentPane().add(Panel_fin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 690));
@@ -160,6 +189,20 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btn_startActionPerformed
+
+    private void btn_restartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restartActionPerformed
+        // TODO add your handling code here:
+        initialiserPartie();
+        Panel_intro.setVisible(false);
+        Panel_jeu.setVisible(true);
+        
+        lbl_score.setText(compteur+"");
+    }//GEN-LAST:event_btn_restartActionPerformed
+
+    private void btn_quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quitActionPerformed
+        // TODO add your handling code here:
+        Panel_fin.setVisible(false);
+    }//GEN-LAST:event_btn_quitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +251,114 @@ public class fenetreDeJeu extends javax.swing.JFrame {
          Grilledejeu.placerBoutonVert(3,3);
         
             
+    }
+    public boolean resteBoutonsVerts(){
+        int z=0;
+        for(int i=0;i<7;i++){
+            for(int j=0;j<7;j++){
+                if(Grilledejeu.Cellules[i][j].presenceBoutonVert()){
+                    z=z+1;
+                }
+            }
+        }
+        if (z==0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public boolean placerBoutonVert(int i, int j){
+        if(Grilledejeu.Cellules[i][j].presenceBoutonVert()==false){
+            Grilledejeu.Cellules[i][j].BoutonCourant.Etat="Vert";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonNoir(int i, int j){
+        if(Grilledejeu.Cellules[i][j].presenceBoutonNoir()==false){
+            Grilledejeu.Cellules[i][j].BoutonCourant.Etat="Noir";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonRouge(int i, int j){
+        if(Grilledejeu.Cellules[i][j].presenceBoutonRouge()==false){
+            Grilledejeu.Cellules[i][j].BoutonCourant.Etat="Rouge";
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
+    public boolean placerBoutonEteint(int i, int j){
+        if(Grilledejeu.Cellules[i][j].presenceBoutonEteint()==false){
+            Grilledejeu.Cellules[i][j].BoutonCourant.Etat="Eteint";
+            return true;
+        }
+        else{
+            return false;
+        }
+     
+    }
+    public void viderGrille(){
+        for(int i=0;i<7;i++){
+            for(int j=0;j<7;j++){
+            Grilledejeu.Cellules[i][j].BoutonCourant.Etat="Eteint"; 
+            }
+        }
+    }
+    public void placerBoutonNoirRandom(){
+        Random random=new Random();
+        int i=new Random().nextInt(7);
+        int j=new Random().nextInt(7);
+        if (Grilledejeu.Cellules[i][j].BoutonCourant.Etat=="Eteint"){
+                placerBoutonNoir(i,j);
+        }else{
+            placerBoutonNoirRandom();
+        }
+    }
+    public void placerBoutonRougeRandom(){
+        Random random=new Random();
+        int i=new Random().nextInt(7);
+        int j=new Random().nextInt(7);
+        if (Grilledejeu.Cellules[i][j].BoutonCourant.Etat=="Eteint"){
+                placerBoutonRouge(i,j);
+        }else{
+            placerBoutonRougeRandom();
+        }
+    }
+    public void placerBoutonVertRandom(){
+        Random random=new Random();
+        int i=new Random().nextInt(7);
+        int j=new Random().nextInt(7);
+        if (Grilledejeu.Cellules[i][j].BoutonCourant.Etat=="Eteint"){
+                placerBoutonVert(i,j);
+        }else{
+            placerBoutonVertRandom();
+        }
+    }
+    
+    public void nouvelleGrille(){
+        Random random=new Random();
+        viderGrille();
+        int kvar = new Random().nextInt(3)+2;
+        int mvar = new Random().nextInt(4)+6;
+        int nvar = new Random().nextInt(3)+3;
+        for (int k=0; k<kvar; k++){
+            placerBoutonNoirRandom();
+            
+            }
+        for(int m=0;m<mvar;m++){
+            placerBoutonRougeRandom();
+        }
+        for(int n=0;n<nvar;n++){
+            placerBoutonVertRandom();    
+        }         
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_fin;
