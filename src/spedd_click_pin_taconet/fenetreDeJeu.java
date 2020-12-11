@@ -387,6 +387,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 placerBoutonVert(i,j);
         }else{
             placerBoutonVertRandom();
+            
         }
     }
     
