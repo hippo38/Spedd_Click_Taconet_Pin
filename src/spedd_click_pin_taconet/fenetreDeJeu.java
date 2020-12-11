@@ -6,6 +6,9 @@
 package spedd_click_pin_taconet;
 
 import java.util.Random;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -16,6 +19,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     /**
      * Creates new form fenetreDeJeu
      */
+    int nbSecondes = 30;
+    Timer monChrono;
     Random random=new Random();
     
     int compteur;
@@ -27,14 +32,36 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         Panel_intro.setVisible(true);
         Panel_jeu.setVisible(false);
         Panel_fin.setVisible(false);
-        //Grille Grilledejeu=new Grille();
+        ActionListener tache_recurrente = new ActionListener() {
+            public void actionPerformed(ActionEvent e1) {
+                nbSecondes--;
+                second.setText(nbSecondes + "");
+                if(nbSecondes==0){
+                   monChrono.stop();  
+                        nbSecondes = 30;
+                        lbl_scorefinal.setText(compteur+"");
+                        lbl_causefin.setText("Time's up, well done!");
+                        Panel_jeu.setVisible(false);
+                        Panel_fin.setVisible(true); 
+                }
+            }
+            
+            
+        
+        ;
+        };
+		
+	monChrono = new Timer(1000, tache_recurrente);
+        
         for (int i=0; i<7; i++){
             for (int j=0; j<7; j++){
                 CelluleGraphique cellGraph =new CelluleGraphique(Grilledejeu.Cellules[i][j]);
                 cellGraph.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    
                     Cellule c=cellGraph.celluleAssociee;
                     if (c.presenceBoutonVert()){
+                        monChrono.start(); 
                         c.BoutonCourant.Etat="Eteint";
                         compteur=compteur+1;
                         
@@ -49,6 +76,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                         compteur=compteur-5;
                     }else if (c.presenceBoutonNoir()){
                         compteur=0;
+                        monChrono.stop();  
+                        nbSecondes = 30;
                         lbl_scorefinal.setText(compteur+"");
                         lbl_causefin.setText("GAME OVER! YOU HIT A BLACK BUTTON");
                         Panel_jeu.setVisible(false);
@@ -57,6 +86,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                     lbl_score.setText(compteur+"");
                     }
                 });
+            
+                
                 Panel_grille.add(cellGraph);
             }
         }
@@ -74,8 +105,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         Panel_jeu = new javax.swing.JPanel();
         Panel_grille = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         lbl_score = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        second = new javax.swing.JLabel();
         Panel_intro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_start = new javax.swing.JButton();
@@ -101,15 +134,25 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         jLabel2.setText("SPEED CLICK");
         Panel_jeu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 200, 50));
 
-        jLabel3.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Score:");
-        Panel_jeu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 90, 70));
-
         lbl_score.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
         lbl_score.setForeground(new java.awt.Color(255, 255, 255));
         lbl_score.setText("arbitraire");
-        Panel_jeu.add(lbl_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 265, -1, -1));
+        Panel_jeu.add(lbl_score, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Score:");
+        Panel_jeu.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, 80, 20));
+
+        jLabel7.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Timer:");
+        Panel_jeu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 80, 20));
+
+        second.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        second.setForeground(new java.awt.Color(255, 255, 255));
+        second.setText("30");
+        Panel_jeu.add(second, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 380, 60, 20));
 
         getContentPane().add(Panel_jeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 690));
 
@@ -182,10 +225,14 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
         // TODO add your handling code here:
+        
         Panel_intro.setVisible(false);
+        
         Panel_jeu.setVisible(true);
         initialiserPartie();
         lbl_score.setText(compteur+"");
+       
+        
         
         
     }//GEN-LAST:event_btn_startActionPerformed
@@ -193,6 +240,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_restartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restartActionPerformed
         // TODO add your handling code here:
         initialiserPartie();
+        second.setText(nbSecondes + "");
         Panel_intro.setVisible(false);
         Panel_jeu.setVisible(true);
         
@@ -201,7 +249,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     private void btn_quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quitActionPerformed
         // TODO add your handling code here:
-        Panel_fin.setVisible(false);
+        //Panel_fin.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btn_quitActionPerformed
 
     /**
@@ -239,15 +288,14 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
     }
     public void initialiserPartie(){
-        //Grille Cellules=new Grille();
-        //Cellules.viderGrille();
+        
         compteur=0;
         for (int i=0; i<7; i++){
             for (int j=0; j<7; j++){
                 Grilledejeu.placerBoutonEteint(i, j);
             }
         }
-        //if(Grilledejeu.Cellules[4][4].presenceBoutonVert()==false){
+        
          Grilledejeu.placerBoutonVert(3,3);
         
             
@@ -347,7 +395,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         viderGrille();
         int kvar = new Random().nextInt(3)+2;
         int mvar = new Random().nextInt(4)+6;
-        int nvar = new Random().nextInt(3)+3;
+        int nvar = new Random().nextInt(3)+1;
         for (int k=0; k<kvar; k++){
             placerBoutonNoirRandom();
             
@@ -370,11 +418,13 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JButton btn_start;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbl_causefin;
     private javax.swing.JLabel lbl_score;
     private javax.swing.JLabel lbl_scorefinal;
+    private javax.swing.JLabel second;
     // End of variables declaration//GEN-END:variables
 }
